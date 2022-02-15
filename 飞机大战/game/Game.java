@@ -79,7 +79,7 @@ public class Game extends JPanel{
 	
 	public String[] Checkpoint = new String[]{"结束","第一关","第二关","第三关","第四关","第五关"};
 	
-	
+	static playsound p;
 
 //	main运行一次 方法也也允许一次   匿名类部类
 	static{
@@ -135,7 +135,19 @@ public class Game extends JPanel{
 		
 		g.action();
 		
-		
+		if(p == null) {
+			p = new playsound();
+//			try {
+			p.open("sounds/background.wav");
+			p.play();
+			p.loop();
+			p.start();
+//			} catch (URISyntaxException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+
+		}
 		
 	}
 	
@@ -295,6 +307,12 @@ public class Game extends JPanel{
 			if(f.hit(b)){
 				index = i ;//
 				f.life -= 1;
+				if (playsound.b[2]) {
+					this.p = new playsound();
+					this.p.open("sounds/Break.wav");
+					this.p.play();
+					this.p.start();
+				}
 				break;
 			}
 		}
