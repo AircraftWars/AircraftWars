@@ -55,7 +55,7 @@ public class Game extends JPanel{
 	public static BufferedImage bee;//蜜蜂
 	public static BufferedImage prop_type;//蜜蜂
 	public static BufferedImage[] bullet;//子弹
-
+	public static BufferedImage[] booms;
 	public static BufferedImage zty;//
 	
 //	创建调用Hero方法函数
@@ -74,6 +74,9 @@ public class Game extends JPanel{
 	public static final int GAME_OVER = 3;//游戏结束
 	
 	public int state = START;//默认启动状态
+
+	public int shouldDeleteEnemy = -1;
+	public int enemyBoomFlag = -1;
 	
 	
 	
@@ -99,6 +102,12 @@ public class Game extends JPanel{
 			heros[2] = ImageIO.read(Hero.class.getClassLoader().getResource("hero_blowup4.png"));
 			heros[3] = ImageIO.read(Hero.class.getClassLoader().getResource("hero_blowup3.png"));
 			heros[4] = ImageIO.read(Hero.class.getClassLoader().getResource("hero_blowup2.png"));
+
+			booms = new BufferedImage[4];
+			booms[0] = ImageIO.read(Hero.class.getClassLoader().getResource("bom1.png"));
+			booms[1] = ImageIO.read(Hero.class.getClassLoader().getResource("bom2.png"));
+			booms[2] = ImageIO.read(Hero.class.getClassLoader().getResource("bom3.png"));
+			booms[3] = ImageIO.read(Hero.class.getClassLoader().getResource("bom4.png"));
 			
 			airplane = ImageIO.read(Hero.class.getClassLoader().getResource("airplane.png"));
 			bossairplanes = ImageIO.read(Hero.class.getClassLoader().getResource("bossAirplane.png"));
@@ -165,9 +174,9 @@ public class Game extends JPanel{
 		paintState(g);//加载状态图
 		paintSL(g);
 		hero.paintObject(g);
-		for(int i=0;i<enemies.length;i++){
-			enemies[i].paintObject(g);
-		}
+		// for(int i=0;i<enemies.length;i++){
+		// 	enemies[i].paintObject(g);
+		// }
 		for(int i=0;i<heroBullets.length;i++){
 			heroBullets[i].paintObject(g);
 		}
@@ -305,8 +314,17 @@ public class Game extends JPanel{
 		for(int i = 0;i<enemies.length;i++){
 			FlyingObject f = enemies[i];
 			if(f.hit(b)){
-				index = i ;//
+				index = i;
 				f.life -= 1;
+				shouldDeleteEnemy = i;
+				if(enemyBoomFlag==3){
+					enemyBoomFlag=-1;
+				}else{
+					enemyBoomFlag+=1;
+					f.image = booms[enemyBoomFlag];
+					
+				}
+				
 				if (playsound.b[2]) {
 					this.p = new playsound();
 					this.p.open("sounds/Break.wav");
@@ -337,11 +355,24 @@ public class Game extends JPanel{
 				}
 
 			}
-			FlyingObject t = enemies[index];
-			enemies[index] = enemies[enemies.length-1];//数组移除
-			enemies[enemies.length-1] = t;
-//			缩容
-			enemies = Arrays.copyOf(enemies, enemies.length-1);
+			// if(enemyBoomFlag!=-1){
+				
+			// 	if(enemyBoomFlag==4){
+			// 		enemyBoomFlag = -1;
+			// 	}else{
+			// 		f.image = booms[enemyBoomFlag];
+			// 		enemyBoomFlag+=1;
+			// 	}
+				
+			// }
+			if(enemyBoomFlag==-1){
+				FlyingObject t = enemies[shouldDeleteEnemy];
+				enemies[shouldDeleteEnemy] = enemies[enemies.length-1];//数组移除
+				enemies[enemies.length-1] = t;
+	//			缩容
+				enemies = Arrays.copyOf(enemies, enemies.length-1);
+			}
+			
 		}
 	}
 //

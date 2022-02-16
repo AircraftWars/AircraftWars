@@ -38,15 +38,34 @@ public class AirPlane extends FlyingObject implements Enemy{
 	 */
 	int index = 1;
 	public BufferedImage getImage() {
-		if(isLife()){
-			return Game.airplane;
-		}else if(isDead()){
-			if(index == 5){
-				state = REMOVE;
-				return null;
-			}
-			return Game.airplane;
-		}
+		// if(life>0){
+		// 	image = Game.airplane;
+		// 	return Game.airplane;
+		// }else if(life==0){
+		// 	if(index==1){
+		// 		index+=1;
+		// 		image = Game.booms[0];
+		// 		return Game.booms[0];
+		// 	}else if(index==2){
+		// 		index+=1;
+		// 		image = Game.booms[1];
+		// 		return Game.booms[1];
+		// 	}else if(index==3){
+		// 		index+=1;
+		// 		image = Game.booms[2];
+		// 		return Game.booms[2];
+		// 	}else if(index==4){
+		// 		index+=1;
+		// 		image = Game.booms[3];
+		// 		return Game.booms[3];
+		// 	}else if(index==5){
+		// 		state = REMOVE;
+		// 		index = 1;
+		// 		image = Game.airplane;
+		// 		return null;
+		// 	}
+		// 	return Game.airplane;
+		// }
 		return null;
 	}
 

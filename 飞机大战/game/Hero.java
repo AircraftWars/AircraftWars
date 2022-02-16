@@ -161,7 +161,7 @@ public Bullet[] shoot(){
 		int x2 = f.x + f.width + this.width/2;
 		
 		int y1 = f.y - this.height/2;
-		int y2 = f.y + f.height - this.height/2;
+		int y2 = f.y + f.height + this.height/2;
 		
 		int x = this.x + this.width/2;
 		int y = this.y + this.height/2;

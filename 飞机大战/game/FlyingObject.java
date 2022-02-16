@@ -26,6 +26,7 @@ public abstract class FlyingObject {
 	public static final int LIFE = 0;
 	public static final int DEAD = 1;
 	public static final int REMOVE = 2;
+	public static final int BOOM = 3;
 	//当前状态
 	protected int state = LIFE;
 
@@ -98,6 +99,10 @@ public abstract class FlyingObject {
 	//将状态改为DEAD
 	public void goDead() {
 		state = DEAD;
+	}
+
+	public void goBoom() {
+		state = BOOM;
 	}
 
 	//在画板上画出图片，getImage()是后面自己写的一个获取图片数据的方法
