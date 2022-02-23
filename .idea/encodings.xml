@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/飞机大战/game/AirPlane.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/飞机大战/game/Award.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/飞机大战/game/Bee.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/飞机大战/game/BossAirplane.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/飞机大战/game/Bullet.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/飞机大战/game/ChecKpoint.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/飞机大战/game/Enemy.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/飞机大战/game/FlyingObject.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/飞机大战/game/Game.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/飞机大战/game/Hero.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/飞机大战/game/Images.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/飞机大战/rabbitmq/RabbitMQConn.java" charset="GBK" />
+  </component>
+</project>
