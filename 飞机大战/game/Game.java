@@ -174,9 +174,9 @@ public class Game extends JPanel{
 		paintState(g);//加载状态图
 		paintSL(g);
 		hero.paintObject(g);
-		// for(int i=0;i<enemies.length;i++){
-		// 	enemies[i].paintObject(g);
-		// }
+		for(int i=0;i<enemies.length;i++){
+			enemies[i].paintObject(g);
+		}
 		for(int i=0;i<heroBullets.length;i++){
 			heroBullets[i].paintObject(g);
 		}
@@ -253,11 +253,11 @@ public class Game extends JPanel{
 //		处理鼠标滑动事件
 		this.addMouseMotionListener(l);
 		
+		enemyBoomFlag = -1;
 //		启用定时器
 		Timer t = new Timer();
 //		调用  重写TimerTask   中的 run 方法
 		t.schedule(new TimerTask() {
-			
 			public void run() {
 				if(state==RUNNING){
 //					checkImg();//清除图片
@@ -292,11 +292,26 @@ public class Game extends JPanel{
 	int score = 0;
 
 	public void checkHitAction(){
+		for(int i = 0;i<enemies.length;i++){
+			FlyingObject f = enemies[i];
+			f.boomflag=0;
+		}
 		for(int i = 0; i<heroBullets.length;i++){
 			Bullet b = heroBullets[i];
+			// enemyBoomFlag=-1;
 			check(b);
 		}
-
+		for(int i = 0;i<enemies.length;i++){
+			FlyingObject f = enemies[i];
+			if(f.boomflag==0){
+				if(f.speed==2){
+					f.image = airplane;
+				}
+				else if(f.speed==1){
+					f.image = bossairplanes;
+				}
+			}
+		}
 	}
 	public void check1(Bullet b){
 		for(int i =0;i<enemiesBullets.length;i++) {
@@ -314,22 +329,28 @@ public class Game extends JPanel{
 		for(int i = 0;i<enemies.length;i++){
 			FlyingObject f = enemies[i];
 			if(f.hit(b)){
+				f.boomflag=1;
 				index = i;
 				f.life -= 1;
 				shouldDeleteEnemy = i;
-				if(enemyBoomFlag==3){
-					enemyBoomFlag=-1;
-				}else{
-					enemyBoomFlag+=1;
-					f.image = booms[enemyBoomFlag];
+				// if(f.life<=0)
+				{
+					if(enemyBoomFlag==3){
+						enemyBoomFlag=-1;
+					}
+
+					else{
+						enemyBoomFlag+=1;
+						f.image = booms[enemyBoomFlag];
+						
+					}
 					
-				}
-				
-				if (playsound.b[2]) {
-					this.p = new playsound();
-					this.p.open("sounds/Break.wav");
-					this.p.play();
-					this.p.start();
+					if (playsound.b[2]) {
+						this.p = new playsound();
+						this.p.open("sounds/Break.wav");
+						this.p.play();
+						this.p.start();
+					}
 				}
 				break;
 			}
@@ -365,12 +386,16 @@ public class Game extends JPanel{
 			// 	}
 				
 			// }
-			if(enemyBoomFlag==-1){
-				FlyingObject t = enemies[shouldDeleteEnemy];
-				enemies[shouldDeleteEnemy] = enemies[enemies.length-1];//数组移除
-				enemies[enemies.length-1] = t;
-	//			缩容
-				enemies = Arrays.copyOf(enemies, enemies.length-1);
+			if(enemyBoomFlag==3){
+				if(enemies[shouldDeleteEnemy].life<=0)
+				{
+					FlyingObject t = enemies[shouldDeleteEnemy];
+					enemies[shouldDeleteEnemy] = enemies[enemies.length-1];//数组移除
+					enemies[enemies.length-1] = t;
+		//			缩容
+					enemies = Arrays.copyOf(enemies, enemies.length-1);
+				}
+				
 			}
 			
 		}
@@ -453,6 +478,7 @@ public class Game extends JPanel{
 		}
 		else{
 			return new AirPlane();
+			// return new BossAirplane();
 		}
 	}
 

@@ -21,6 +21,10 @@ public abstract class FlyingObject {
 	protected int y;
 	protected int life;
 
+	public int speed;
+
+	public int boomflag=0;
+
 	//private int direction;
 	//×´Ì¬³£Á¿
 	public static final int LIFE = 0;

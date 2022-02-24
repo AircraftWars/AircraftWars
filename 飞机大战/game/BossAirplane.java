@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 public class BossAirplane extends FlyingObject implements Enemy,Award {
 
-    private int speed;
+    // public int speed;
 
     BossAirplane(){
         //super(150,113,10);
@@ -17,8 +17,8 @@ public class BossAirplane extends FlyingObject implements Enemy,Award {
         this.height = 113;
         this.x = (int) (Math.random() * (Game.WIDTH - width));
         this.y = -height;
-        this.life = 10;
-
+        this.life = 50;
+        boomflag = 0;
         speed = 1;
     }
 

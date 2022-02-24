@@ -11,14 +11,14 @@ import java.awt.image.BufferedImage;
 public class AirPlane extends FlyingObject implements Enemy{
 	private ChecKpoint Checkpoints = new ChecKpoint();
 	//	移动速度
-	 private int speed;
+	//  public int speed;
 
 //	飞机一旦创建就有自己的类型
 	public AirPlane(){
 //		获取图片
 		System.out.println("速度："+Checkpoints.ckt);
 		
-
+		boomflag = 0;
 		image = Game.airplane;
 //		获取图片自己的大小
 		width = image.getWidth();
